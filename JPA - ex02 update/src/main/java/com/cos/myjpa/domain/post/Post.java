@@ -1,0 +1,47 @@
+package com.cos.myjpa.domain.post;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.cos.myjpa.domain.user.User;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Data
+public class Post {
+	
+	@Id
+	@GeneratedValue(strategy =GenerationType.IDENTITY )  // Table,Auto_increment,Sequence
+	private Long id;
+	@Column(length=60,nullable = false)
+	private String title;
+	@Lob // 대용량데이터
+	private String content;
+	
+	 @ManyToOne(fetch = FetchType.EAGER)  //  many는 post one은 user 관계를 맺었다
+	 @JoinColumn(name="userId")
+	   private User user;
+
+	// 누가 적었는지?
+	@CreationTimestamp
+	private LocalDateTime createDate;
+}

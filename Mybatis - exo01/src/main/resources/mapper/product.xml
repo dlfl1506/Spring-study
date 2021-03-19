@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cos.mybatisex01.repository.ProductRepository">
+  <insert id="save">
+     INSERT INTO product(name, code) values(#{name}, #{code})
+     <!--오브젝트 들어와서 매핑되서 위에 name code가 들어옴 -->
+  </insert>
+  
+  <delete id = "deleteById">
+  	DELETE FROM product WHERE id = #{id}
+  </delete>
+  
+  
+  <update id ="update">
+  UPDATE product SET name= #{name},code = #{code} WHERE id =#{id}
+  </update>
+  
+  <select id="findAll" resultType="com.cos.mybatisex01.model.Product">
+  SELECT * FROM product
+  </select>
+  
+  
+   <select id="findById" resultType="com.cos.mybatisex01.model.Product">
+  SELECT * FROM product WHERE id = #{id}
+  </select>
+  
+  
+</mapper>
